@@ -124,7 +124,7 @@ namespace PaperProduction
             {
                 for (int j = 0; j < dataGridView.Columns.Count; j++)
                 {
-                    xcelApp.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value.ToString();                    
+                    xcelApp.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value;                    
                 }
             }
             xcelApp.Columns.AutoFit();

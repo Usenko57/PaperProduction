@@ -1,4 +1,6 @@
-﻿namespace PaperProduction
+﻿using System.Windows.Forms;
+
+namespace PaperProduction
 {
     partial class AddToDatabaseForm
     {
@@ -50,10 +52,6 @@
             this.colorfulnessBlockComboBox = new System.Windows.Forms.ComboBox();
             this.colorfulСoverLabel = new System.Windows.Forms.Label();
             this.colorfulCoverComboBox = new System.Windows.Forms.ComboBox();
-            this.masterFilmTextLabel = new System.Windows.Forms.Label();
-            this.masterFilmCoverLabel = new System.Windows.Forms.Label();
-            this.masterFilmTextTextBox = new System.Windows.Forms.TextBox();
-            this.masterFilmCoverTextBox = new System.Windows.Forms.TextBox();
             this.technicalNeedsLabel = new System.Windows.Forms.Label();
             this.technicalNeedsComboBox = new System.Windows.Forms.ComboBox();
             this.paperDensityComboBox = new System.Windows.Forms.ComboBox();
@@ -66,6 +64,13 @@
             this.countTextBox = new System.Windows.Forms.TextBox();
             this.addButton = new System.Windows.Forms.Button();
             this.goViewButton = new System.Windows.Forms.Button();
+            this.masterFilmCoverLabel = new System.Windows.Forms.Label();
+            this.masterFilmCoverTextBox = new System.Windows.Forms.TextBox();
+            this.addPaper = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Header = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // invoiceCalculationLabel
@@ -301,51 +306,11 @@
             this.colorfulCoverComboBox.Size = new System.Drawing.Size(165, 33);
             this.colorfulCoverComboBox.TabIndex = 23;
             // 
-            // masterFilmTextLabel
-            // 
-            this.masterFilmTextLabel.AutoSize = true;
-            this.masterFilmTextLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.masterFilmTextLabel.Location = new System.Drawing.Point(20, 401);
-            this.masterFilmTextLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.masterFilmTextLabel.Name = "masterFilmTextLabel";
-            this.masterFilmTextLabel.Size = new System.Drawing.Size(214, 25);
-            this.masterFilmTextLabel.TabIndex = 24;
-            this.masterFilmTextLabel.Text = "Мастер-плёнка текст";
-            // 
-            // masterFilmCoverLabel
-            // 
-            this.masterFilmCoverLabel.AutoSize = true;
-            this.masterFilmCoverLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.masterFilmCoverLabel.Location = new System.Drawing.Point(448, 406);
-            this.masterFilmCoverLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.masterFilmCoverLabel.Name = "masterFilmCoverLabel";
-            this.masterFilmCoverLabel.Size = new System.Drawing.Size(241, 25);
-            this.masterFilmCoverLabel.TabIndex = 25;
-            this.masterFilmCoverLabel.Text = "Мастер-плёнка обложка";
-            // 
-            // masterFilmTextTextBox
-            // 
-            this.masterFilmTextTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.masterFilmTextTextBox.Location = new System.Drawing.Point(178, 401);
-            this.masterFilmTextTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.masterFilmTextTextBox.Name = "masterFilmTextTextBox";
-            this.masterFilmTextTextBox.Size = new System.Drawing.Size(184, 30);
-            this.masterFilmTextTextBox.TabIndex = 26;
-            // 
-            // masterFilmCoverTextBox
-            // 
-            this.masterFilmCoverTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.masterFilmCoverTextBox.Location = new System.Drawing.Point(618, 406);
-            this.masterFilmCoverTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.masterFilmCoverTextBox.Name = "masterFilmCoverTextBox";
-            this.masterFilmCoverTextBox.Size = new System.Drawing.Size(184, 30);
-            this.masterFilmCoverTextBox.TabIndex = 27;
-            // 
             // technicalNeedsLabel
             // 
             this.technicalNeedsLabel.AutoSize = true;
             this.technicalNeedsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.technicalNeedsLabel.Location = new System.Drawing.Point(19, 476);
+            this.technicalNeedsLabel.Location = new System.Drawing.Point(26, 410);
             this.technicalNeedsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.technicalNeedsLabel.Name = "technicalNeedsLabel";
             this.technicalNeedsLabel.Size = new System.Drawing.Size(199, 25);
@@ -357,7 +322,7 @@
             this.technicalNeedsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.technicalNeedsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.technicalNeedsComboBox.FormattingEnabled = true;
-            this.technicalNeedsComboBox.Location = new System.Drawing.Point(165, 476);
+            this.technicalNeedsComboBox.Location = new System.Drawing.Point(169, 410);
             this.technicalNeedsComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.technicalNeedsComboBox.Name = "technicalNeedsComboBox";
             this.technicalNeedsComboBox.Size = new System.Drawing.Size(136, 33);
@@ -368,7 +333,7 @@
             this.paperDensityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.paperDensityComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.paperDensityComboBox.FormattingEnabled = true;
-            this.paperDensityComboBox.Location = new System.Drawing.Point(484, 481);
+            this.paperDensityComboBox.Location = new System.Drawing.Point(494, 410);
             this.paperDensityComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.paperDensityComboBox.Name = "paperDensityComboBox";
             this.paperDensityComboBox.Size = new System.Drawing.Size(125, 33);
@@ -378,7 +343,7 @@
             // 
             this.paperDensityLabel.AutoSize = true;
             this.paperDensityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.paperDensityLabel.Location = new System.Drawing.Point(351, 484);
+            this.paperDensityLabel.Location = new System.Drawing.Point(360, 413);
             this.paperDensityLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.paperDensityLabel.Name = "paperDensityLabel";
             this.paperDensityLabel.Size = new System.Drawing.Size(186, 25);
@@ -389,7 +354,7 @@
             // 
             this.paperNameLabel.AutoSize = true;
             this.paperNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.paperNameLabel.Location = new System.Drawing.Point(658, 484);
+            this.paperNameLabel.Location = new System.Drawing.Point(658, 418);
             this.paperNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.paperNameLabel.Name = "paperNameLabel";
             this.paperNameLabel.Size = new System.Drawing.Size(220, 25);
@@ -398,10 +363,9 @@
             // 
             // paperNameComboBox
             // 
-            this.paperNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.paperNameComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.paperNameComboBox.FormattingEnabled = true;
-            this.paperNameComboBox.Location = new System.Drawing.Point(820, 481);
+            this.paperNameComboBox.Location = new System.Drawing.Point(820, 413);
             this.paperNameComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.paperNameComboBox.Name = "paperNameComboBox";
             this.paperNameComboBox.Size = new System.Drawing.Size(370, 33);
@@ -411,7 +375,7 @@
             // 
             this.bindingMaterialsLabel.AutoSize = true;
             this.bindingMaterialsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bindingMaterialsLabel.Location = new System.Drawing.Point(20, 557);
+            this.bindingMaterialsLabel.Location = new System.Drawing.Point(27, 68);
             this.bindingMaterialsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.bindingMaterialsLabel.Name = "bindingMaterialsLabel";
             this.bindingMaterialsLabel.Size = new System.Drawing.Size(254, 25);
@@ -420,10 +384,9 @@
             // 
             // bindingMaterialsComboBox
             // 
-            this.bindingMaterialsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.bindingMaterialsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bindingMaterialsComboBox.FormattingEnabled = true;
-            this.bindingMaterialsComboBox.Location = new System.Drawing.Point(197, 557);
+            this.bindingMaterialsComboBox.Location = new System.Drawing.Point(209, 65);
             this.bindingMaterialsComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.bindingMaterialsComboBox.Name = "bindingMaterialsComboBox";
             this.bindingMaterialsComboBox.Size = new System.Drawing.Size(400, 33);
@@ -433,7 +396,7 @@
             // 
             this.countLabel.AutoSize = true;
             this.countLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.countLabel.Location = new System.Drawing.Point(642, 557);
+            this.countLabel.Location = new System.Drawing.Point(711, 69);
             this.countLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.countLabel.Name = "countLabel";
             this.countLabel.Size = new System.Drawing.Size(123, 25);
@@ -443,7 +406,7 @@
             // countTextBox
             // 
             this.countTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.countTextBox.Location = new System.Drawing.Point(747, 557);
+            this.countTextBox.Location = new System.Drawing.Point(796, 69);
             this.countTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox.Name = "countTextBox";
             this.countTextBox.Size = new System.Drawing.Size(184, 30);
@@ -451,10 +414,11 @@
             // 
             // addButton
             // 
+            this.addButton.AutoSize = true;
             this.addButton.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.addButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.addButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.addButton.Location = new System.Drawing.Point(1041, 552);
+            this.addButton.Location = new System.Drawing.Point(1017, 55);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(176, 51);
             this.addButton.TabIndex = 44;
@@ -472,27 +436,93 @@
             this.goViewButton.UseVisualStyleBackColor = true;
             this.goViewButton.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // masterFilmCoverLabel
+            // 
+            this.masterFilmCoverLabel.AutoSize = true;
+            this.masterFilmCoverLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.masterFilmCoverLabel.Location = new System.Drawing.Point(861, 328);
+            this.masterFilmCoverLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.masterFilmCoverLabel.Name = "masterFilmCoverLabel";
+            this.masterFilmCoverLabel.Size = new System.Drawing.Size(241, 25);
+            this.masterFilmCoverLabel.TabIndex = 46;
+            this.masterFilmCoverLabel.Text = "Мастер-плёнка обложка";
+            // 
+            // masterFilmCoverTextBox
+            // 
+            this.masterFilmCoverTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.masterFilmCoverTextBox.Location = new System.Drawing.Point(1033, 325);
+            this.masterFilmCoverTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.masterFilmCoverTextBox.Name = "masterFilmCoverTextBox";
+            this.masterFilmCoverTextBox.Size = new System.Drawing.Size(184, 30);
+            this.masterFilmCoverTextBox.TabIndex = 47;
+            // 
+            // addPaper
+            // 
+            this.addPaper.Location = new System.Drawing.Point(1215, 413);
+            this.addPaper.Name = "addPaper";
+            this.addPaper.Size = new System.Drawing.Size(41, 36);
+            this.addPaper.TabIndex = 48;
+            this.addPaper.Text = "+";
+            this.addPaper.UseVisualStyleBackColor = true;
+            this.addPaper.Click += new System.EventHandler(this.addPaper_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(625, 62);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(41, 36);
+            this.button1.TabIndex = 49;
+            this.button1.Text = "+";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.bindingMaterialsComboBox);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.bindingMaterialsLabel);
+            this.groupBox1.Controls.Add(this.countTextBox);
+            this.groupBox1.Controls.Add(this.countLabel);
+            this.groupBox1.Controls.Add(this.addButton);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox1.Location = new System.Drawing.Point(24, 482);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1250, 161);
+            this.groupBox1.TabIndex = 50;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Переплётные материалы";
+            // 
+            // Header
+            // 
+            this.Header.AutoSize = true;
+            this.Header.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Header.Location = new System.Drawing.Point(624, 9);
+            this.Header.Name = "Header";
+            this.Header.Size = new System.Drawing.Size(116, 32);
+            this.Header.TabIndex = 51;
+            this.Header.Text = "Бумага";
+            // 
             // AddToDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 26F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1268, 663);
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1305, 627);
+            this.Controls.Add(this.Header);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.addPaper);
+            this.Controls.Add(this.masterFilmCoverTextBox);
+            this.Controls.Add(this.masterFilmCoverLabel);
             this.Controls.Add(this.goViewButton);
-            this.Controls.Add(this.addButton);
-            this.Controls.Add(this.countTextBox);
-            this.Controls.Add(this.countLabel);
-            this.Controls.Add(this.bindingMaterialsComboBox);
-            this.Controls.Add(this.bindingMaterialsLabel);
             this.Controls.Add(this.paperNameComboBox);
             this.Controls.Add(this.paperNameLabel);
             this.Controls.Add(this.paperDensityLabel);
             this.Controls.Add(this.paperDensityComboBox);
             this.Controls.Add(this.technicalNeedsComboBox);
             this.Controls.Add(this.technicalNeedsLabel);
-            this.Controls.Add(this.masterFilmCoverTextBox);
-            this.Controls.Add(this.masterFilmTextTextBox);
-            this.Controls.Add(this.masterFilmCoverLabel);
-            this.Controls.Add(this.masterFilmTextLabel);
             this.Controls.Add(this.colorfulCoverComboBox);
             this.Controls.Add(this.colorfulСoverLabel);
             this.Controls.Add(this.colorfulnessBlockComboBox);
@@ -520,6 +550,8 @@
             this.Name = "AddToDatabaseForm";
             this.Text = "Добавление в базу";
             this.Load += new System.EventHandler(this.PaperProduction_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -549,10 +581,6 @@
         private System.Windows.Forms.ComboBox colorfulnessBlockComboBox;
         private System.Windows.Forms.Label colorfulСoverLabel;
         private System.Windows.Forms.ComboBox colorfulCoverComboBox;
-        private System.Windows.Forms.Label masterFilmTextLabel;
-        private System.Windows.Forms.Label masterFilmCoverLabel;
-        private System.Windows.Forms.TextBox masterFilmTextTextBox;
-        private System.Windows.Forms.TextBox masterFilmCoverTextBox;
         private System.Windows.Forms.Label technicalNeedsLabel;
         private System.Windows.Forms.ComboBox technicalNeedsComboBox;
         private System.Windows.Forms.ComboBox paperDensityComboBox;
@@ -565,6 +593,12 @@
         private System.Windows.Forms.TextBox countTextBox;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button goViewButton;
+        private System.Windows.Forms.Label masterFilmCoverLabel;
+        private System.Windows.Forms.TextBox masterFilmCoverTextBox;
+        private System.Windows.Forms.Button addPaper;
+        private Button button1;
+        private GroupBox groupBox1;
+        private Label Header;
     }
 }
 

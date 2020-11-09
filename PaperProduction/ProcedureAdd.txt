@@ -2,14 +2,14 @@
 delimiter |
 create procedure addData(_invoice_calculation int(11),_order_name varchar(150) charset utf8,
 _type_of_printed_matter enum('книжно-журнальная','изобразительная','бланочная') 
-charset utf8, _equipment varchar(100) charset utf8, _source_of_financing enum('б','б/в') 
+charset utf8, _equipment varchar(100) charset utf8, _source_of_financing enum('','б','б/в') 
 charset utf8, _circulation double, _product_format enum('А3','А4','А5','А6') 
 charset utf8, _page_volume double, _sheet_share double, _printing_forms double, 
 _сolorfull_block enum('1+0','1+1','4+0','4+1') charset utf8, _cover_art 
 enum('1+0','1+1','4+0','4+1') charset utf8, _master_film_text varchar(45) charset utf8, _master_film_cover 
 varchar(45) charset utf8, _net_print_run double, _technical_needs enum('1,03','1,04','1,06','1,1','1,133') 
 charset utf8, _paper1 double, _paper_density enum('80','120','160','170','200','280') 
-charset utf8, _paper_name varchar(100) charset utf8, _total_weight double, _name_of_binding_materials
+charset utf8, _paper_name varchar(5000) charset utf8, _total_weight double, _name_of_binding_materials
 varchar(100) charset utf8, _count varchar(45) charset utf8)
 begin
 	insert into papers(invoice_calculation,order_name, type_of_printed_matter, equipment, source_of_financing,
@@ -26,7 +26,7 @@ end|
 
 drop procedure selectPapers;
 delimiter |
-create procedure selectPapers(_paper_name varchar(100) charset utf8,
+create procedure selectPapers(_paper_name varchar(5000) charset utf8,
  _master_film_text varchar(45) charset utf8, _master_film_cover varchar(45) charset utf8,
  from_ivoice_calculation int(11), to_ivoice_calculation int(11))
 begin
