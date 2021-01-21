@@ -338,6 +338,7 @@ namespace PaperProduction
             this.paperDensityComboBox.Name = "paperDensityComboBox";
             this.paperDensityComboBox.Size = new System.Drawing.Size(125, 33);
             this.paperDensityComboBox.TabIndex = 34;
+            this.paperDensityComboBox.SelectedIndexChanged += new System.EventHandler(this.paperDensityComboBox_SelectedIndexChanged);
             // 
             // paperDensityLabel
             // 
@@ -406,7 +407,7 @@ namespace PaperProduction
             // countTextBox
             // 
             this.countTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.countTextBox.Location = new System.Drawing.Point(796, 69);
+            this.countTextBox.Location = new System.Drawing.Point(796, 68);
             this.countTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox.Name = "countTextBox";
             this.countTextBox.Size = new System.Drawing.Size(184, 30);

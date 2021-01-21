@@ -35,9 +35,19 @@ namespace PaperProduction
                 "Пленка д. лам.пакет 303*426 (А3) 175 микр мат.", "Скобы 66/6 (5000)", "Скобы 66/8+ (5000)", "Скобы для DBM-20 (5000 шт)"
             };
 
+        string[] paperDensityNames = { "80", "120", "160", "170", "200", "280" };
+
+        string[] technicalNeeds = { "1,03", "1,04", "1,06", "1,1", "1,133" };
+
         List<ComboBox> paperComboBoxes { get; set; }
 
         List<ComboBox> bindingMaterialsComboBoxes { get; set; }
+
+        List<ComboBox> paperDensityComboBoxes { get; set; }
+
+        List<ComboBox> technicalNeedsComboBoxes { get; set; }
+
+        List<TextBox> countTextBoxes { get; set; }
         public AddToDatabaseForm()
         {
             InitializeComponent();
@@ -46,6 +56,9 @@ namespace PaperProduction
             paperComboBoxes = new List<ComboBox>();
             prev_locationBindingMaterialsY = bindingMaterialsComboBox.Location.Y;
             bindingMaterialsComboBoxes = new List<ComboBox>();
+            paperDensityComboBoxes = new List<ComboBox>();
+            technicalNeedsComboBoxes = new List<ComboBox>();
+            countTextBoxes = new List<TextBox>();
         }
 
         private void initForm()
@@ -57,8 +70,8 @@ namespace PaperProduction
             productFormatComboBox.Items.AddRange(new string[] { "А3", "А4", "А5", "А6" });
             colorfulnessBlockComboBox.Items.AddRange(new string[] { "1+0", "1+1", "4+0", "4+1" });
             colorfulCoverComboBox.Items.AddRange(new string[] { "1+0", "1+1", "4+0", "4+1" });
-            paperDensityComboBox.Items.AddRange(new string[] { "80", "120", "160", "170", "200", "280" });
-            technicalNeedsComboBox.Items.AddRange(new string[] { "1,03", "1,04", "1,06", "1,1", "1,133" });
+            paperDensityComboBox.Items.AddRange(paperDensityNames);
+            technicalNeedsComboBox.Items.AddRange(technicalNeeds);
             paperNameComboBox.Items.AddRange(paperNames);
             bindingMaterialsComboBox.Items.AddRange(bindingMaterials);
             sourceOfFinancingComboBox.Items.AddRange(new string[] { "б", "б/в" });
@@ -120,16 +133,25 @@ namespace PaperProduction
                 6 * masterFilmCover;
             double m = 0;
             List<string> papers = new List<string>();
+            List<string> technicalNeedsList = new List<string>();
+            List<string> paperDensitiesList = new List<string>();
+            List<string> counts = new List<string>();
             papers.Add(paperNameComboBox.Text);
+            technicalNeedsList.Add(technicalNeedsComboBox.Text);
+            paperDensitiesList.Add(paperDensityComboBox.Text);
             for (int i = 0; i < paperComboBoxes.Count(); i++)
             {
                 papers.Add(paperComboBoxes[i].Text);
+                technicalNeedsList.Add(technicalNeedsComboBoxes[i].Text);
+                paperDensitiesList.Add(paperDensityComboBoxes[i].Text);
             }
             List<string> bindingMaterials = new List<string>();
             bindingMaterials.Add(bindingMaterialsComboBox.Text);
+            counts.Add(countTextBox.Text);
             for (int i = 0; i < bindingMaterialsComboBoxes.Count(); i++)
             {
                 bindingMaterials.Add(bindingMaterialsComboBoxes[i].Text);
+                counts.Add(countTextBoxes[i].Text);
             }
             switch (paperDensityComboBox.Text)
             {
@@ -143,8 +165,7 @@ namespace PaperProduction
             MySqlCommand command = new MySqlCommand("call addData(@invoice_calculation, @orderName, @typeOfPrintedMatter, @equipment," +
                 "@sourceOfFinancing, @circulation, @productFormat, @pageVolume, @sheetShare, @printing_forms, " +
                 "@сolorfull_block, @cover_art, @master_film_text, @master_film_cover, @net_print_run," +
-                "@technical_needs, @paper1, @paper_density, @paper_name, @total_weight, " +
-                "@name_of_binding_materials, @count)", db.GetConnection());
+                "@technical_needs, @paper1, @paper_density, @paper_name, @total_weight);", db.GetConnection());
             command.Parameters.Add("@orderName", MySqlDbType.VarChar).Value = orderNameTextBox.Text;
             command.Parameters.Add("@typeOfPrintedMatter", MySqlDbType.Enum).Value = typeOfPrintedMatterComboBox.Text;
             command.Parameters.Add("@equipment", MySqlDbType.VarChar).Value = equipmentСomboBox.Text;
@@ -159,21 +180,35 @@ namespace PaperProduction
             command.Parameters.Add("@master_film_text", MySqlDbType.Double).Value = masterFilmText;
             command.Parameters.Add("@master_film_cover", MySqlDbType.VarChar).Value = masterFilmCoverTextBox.Text;
             command.Parameters.Add("@net_print_run", MySqlDbType.Double).Value = Math.Round(net_print_run, 4);
-            command.Parameters.Add("@technical_needs", MySqlDbType.Enum).Value = technicalNeedsComboBox.Text;
+            command.Parameters.Add("@technical_needs", MySqlDbType.VarChar).Value = string.Join("; ", technicalNeedsList);
             command.Parameters.Add("@paper1", MySqlDbType.Double).Value = Math.Round(paper1, 4);
-            command.Parameters.Add("@paper_density", MySqlDbType.Enum).Value = paperDensityComboBox.Text;
-            command.Parameters.Add("@paper_name", MySqlDbType.VarChar).Value = String.Join(";  ", papers.ToArray());
+            command.Parameters.Add("@paper_density", MySqlDbType.VarChar).Value = string.Join("; ", paperDensitiesList);
+            command.Parameters.Add("@paper_name", MySqlDbType.VarChar).Value = string.Join(";  ", papers.ToArray());
             command.Parameters.Add("@total_weight", MySqlDbType.Double).Value = Math.Round(paper1 * m, 4);
-            command.Parameters.Add("@name_of_binding_materials", MySqlDbType.VarChar).Value = String.Join("; ", bindingMaterials.ToArray());
-            command.Parameters.Add("@count", MySqlDbType.VarChar).Value = countTextBox.Text;
             command.Parameters.Add("@invoice_calculation", MySqlDbType.Int32).Value = invoiceCalculationTextBox.Text;
 
+            command.CommandText += "insert into binding_materials(name_of_binding_materials,count) values ";
+
+            for (int i = 0; i < bindingMaterials.Count; i++)
+            {
+                command.Parameters.Add("@name_of_binding_materials" + i.ToString(), MySqlDbType.VarChar).Value = bindingMaterials[i];
+                command.Parameters.Add("@count" + i.ToString(), MySqlDbType.VarChar).Value = counts[i];
+                command.CommandText += "(@name_of_binding_materials" + i.ToString() + ", ";
+                command.CommandText += "@count" + i.ToString() + ")";
+                if (i < bindingMaterials.Count - 1)
+                    command.CommandText += ",";
+                else
+                    command.CommandText += ";";
+            }                     
+
             db.OpenConnection();
-            if (command.ExecuteNonQuery() == 1)
+            if (command.ExecuteNonQuery() != 0)
+            {
                 MessageBox.Show("Добавлено в базу");
+                clearFields();
+            }
             else
-                MessageBox.Show("Не получилось добавить в базу");
-            clearFields();
+                MessageBox.Show("Не получилось добавить в базу");            
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -221,9 +256,32 @@ namespace PaperProduction
                 DropDownWidth = 370,
                 DropDownStyle = ComboBoxStyle.DropDown
             };
+
+            ComboBox comboBox1 = new ComboBox()
+            {
+                Name = "paperDensityComboBox" + paperDensityComboBoxes.Count.ToString(),
+                Size = paperDensityComboBox.Size,
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new Point(494, prev_locationY + 35),
+            };
+
+            ComboBox comboBox2 = new ComboBox()
+            {
+                Name = "technicalNeedsComboBox" + technicalNeedsComboBoxes.Count.ToString(),
+                Size = technicalNeedsComboBox.Size,
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Location = new Point(169, prev_locationY + 35),
+            };
+
             comboBox.Items.AddRange(paperNames);
+            comboBox1.Items.AddRange(paperDensityNames);
+            comboBox2.Items.AddRange(technicalNeeds);
             this.Controls.Add(comboBox);
+            this.Controls.Add(comboBox1);
+            this.Controls.Add(comboBox2);
             paperComboBoxes.Add(comboBox);
+            paperDensityComboBoxes.Add(comboBox1);
+            technicalNeedsComboBoxes.Add(comboBox2);
             prev_locationY += 35;
             groupBox1.Location = new Point(groupBox1.Location.X, groupBox1.Location.Y + 35);
         }
@@ -239,11 +297,28 @@ namespace PaperProduction
                 DropDownWidth = 400,
                 DropDownStyle = ComboBoxStyle.DropDown
             };
+
+            TextBox textBox = new TextBox()
+            {
+                Name = "countTextBox" + countTextBoxes.Count.ToString(),
+                Location = new Point(796, prev_locationBindingMaterialsY + 35),
+                Size = new Size(184, 30),
+                Font = new Font(countTextBox.Font.Name, countTextBox.Font.Size, countTextBox.Font.Style)
+            };
+
             comboBox.Items.AddRange(bindingMaterials);
             this.Controls.Add(comboBox);
+            this.Controls.Add(textBox);
             this.groupBox1.Controls.Add(comboBox);
+            this.groupBox1.Controls.Add(textBox);
             bindingMaterialsComboBoxes.Add(comboBox);
+            countTextBoxes.Add(textBox);
             prev_locationBindingMaterialsY += 35;
+        }
+
+        private void paperDensityComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

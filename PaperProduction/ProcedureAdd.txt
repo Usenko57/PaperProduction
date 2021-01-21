@@ -1,4 +1,5 @@
-﻿drop procedure addData;
+﻿use paper_production;
+drop procedure addData;
 delimiter |
 create procedure addData(_invoice_calculation int(11),_order_name varchar(150) charset utf8,
 _type_of_printed_matter enum('книжно-журнальная','изобразительная','бланочная') 
@@ -7,10 +8,7 @@ charset utf8, _circulation double, _product_format enum('А3','А4','А5','А6')
 charset utf8, _page_volume double, _sheet_share double, _printing_forms double, 
 _сolorfull_block enum('1+0','1+1','4+0','4+1') charset utf8, _cover_art 
 enum('1+0','1+1','4+0','4+1') charset utf8, _master_film_text varchar(45) charset utf8, _master_film_cover 
-varchar(45) charset utf8, _net_print_run double, _technical_needs enum('1,03','1,04','1,06','1,1','1,133') 
-charset utf8, _paper1 double, _paper_density enum('80','120','160','170','200','280') 
-charset utf8, _paper_name varchar(5000) charset utf8, _total_weight double, _name_of_binding_materials
-varchar(100) charset utf8, _count varchar(45) charset utf8)
+varchar(45) charset utf8, _net_print_run double, _technical_needs varchar(5000) charset utf8, _paper1 double, _paper_density varchar(5000) charset utf8, _paper_name varchar(5000) charset utf8, _total_weight double)
 begin
 	insert into papers(invoice_calculation,order_name, type_of_printed_matter, equipment, source_of_financing,
     circulation, product_format, page_volume, sheet_share, printing_forms, сolorfull_block,
@@ -19,9 +17,7 @@ begin
     _equipment, _source_of_financing, _circulation, _product_format, _page_volume, 
     _sheet_share, _printing_forms, _сolorfull_block, _cover_art, _master_film_text, 
     _master_film_cover, _net_print_run, _technical_needs, _paper1, _paper_density, 
-    _paper_name, _total_weight);
-    insert into binding_materials(name_of_binding_materials, count) 
-    values(_name_of_binding_materials, _count);
+    _paper_name, _total_weight);    
 end|
 
 drop procedure selectPapers;
